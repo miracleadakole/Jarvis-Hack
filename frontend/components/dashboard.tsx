@@ -235,7 +235,6 @@ export default function Dashboard() {
                 </TabsContent>
                 <TabsContent value="billing">
                   <div className="space-y-4">
-                    <h2 className="text-lg font-semibold text-foreground">Billing & Usage</h2>
                     <p className="text-muted-foreground">Manage your Bills</p>                  
                     <BillingSection onPayment={function (amount: number, currency: string): void {
                       throw new Error("Function not implemented.")
