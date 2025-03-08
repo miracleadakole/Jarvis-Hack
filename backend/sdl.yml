@@ -1,0 +1,46 @@
+---
+version: "2.0"
+
+services:
+  app:
+    image: <your-dockerhub-username>/akash-cloud-manager:latest
+    expose:
+      - port: 5000
+        as: 80
+        to:
+          - global: true
+    env:
+      - "AKASH_MNEMONIC=<your-akash-mnemonic>"
+      - "AKASH_KEYRING_BACKEND=test"
+      - "AKASH_NET=https://raw.githubusercontent.com/akash-network/networks/master/testnet"
+      - "AKASH_CHAIN_ID=akash-testnet"
+      - "AKASH_NODE=http://rpc.testnet.akash.network:26657"
+      - "DATABASE_URL=postgresql+psycopg2://akash_user:akash_pass@localhost/akash_manager"
+
+profiles:
+  compute:
+    app:
+      resources:
+        cpu:
+          units: 1.0
+        memory:
+          size: 2Gi
+        storage:
+          - size: 2Gi
+          - size: 5Gi
+            name: pgdata
+  placement:
+    akash:
+      pricing:
+        app:
+          denom: uakt
+          amount: 1500
+
+deployment:
+  app:
+    akash:
+      profile: app
+      count: 1
+      persistence:
+        - name: pgdata
+          mount-path: /data/pgdata
