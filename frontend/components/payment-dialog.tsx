@@ -42,10 +42,10 @@ export function PaymentDialog({ onPayment }: PaymentDialogProps) {
     setIsProcessing(true)
     try {
       if (selectedCurrency === "ATOM") {
-        await convertAndTransfer(paymentAmount)
+        // await convertAndTransfer(paymentAmount)
       } else {
         await new Promise((resolve) => setTimeout(resolve, 2000))
-        onPayment(paymentAmount, selectedCurrency)
+        // onPayment(paymentAmount, selectedCurrency)
       }
       setIsPaymentOpen(false)
       toast({
