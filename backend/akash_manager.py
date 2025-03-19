@@ -102,9 +102,9 @@ def deploy_to_akash(wallet_address, image="nginx", cpu=0.1, memory="512Mi", stor
     with open("temp_sdl.yml", "w") as f:
         yaml.dump(sdl_content, f)
     
-    # Use Akash CLI for deployment
+    # Use Akash CLI (provider-services) for deployment
     cmd = [
-        "akash", "tx", "deployment", "create", "temp_sdl.yml",
+        "provider-services", "tx", "deployment", "create", "temp_sdl.yml",
         "--from", "my_wallet",
         "--chain-id", os.environ["AKASH_CHAIN_ID"],
         "--node", os.environ["AKASH_NODE"],
